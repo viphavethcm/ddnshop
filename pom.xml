@@ -16,5 +16,6 @@
 
     <modules>
         <module>spring-cloud-config-server</module>
+        <module>roles-service</module>
     </modules>
 </project>

@@ -1,13 +1,13 @@
-package comddnshop.ddnshopmicroservices;
+package com.ddnshop.rolesservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DdnshopMicroservicesApplication {
+public class RolesServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DdnshopMicroservicesApplication.class, args);
+        SpringApplication.run(RolesServiceApplication.class, args);
     }
 
 }
