@@ -16,6 +16,9 @@
 
     <modules>
         <module>spring-cloud-config-server</module>
+        <module>eureka-naming-server</module>
+        <module>zuul-api-gateway-server</module>
         <module>roles-service</module>
+        <module>users-info-service</module>
     </modules>
 </project>
