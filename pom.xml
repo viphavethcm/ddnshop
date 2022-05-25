@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.3.RELEASE</version>
+        <version>2.6.7</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>comddnshop</groupId>
@@ -13,12 +13,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>ddnshop-microservices</name>
     <description>ddnshop microservices</description>
+    <packaging>pom</packaging>
 
     <modules>
-        <module>spring-cloud-config-server</module>
         <module>eureka-naming-server</module>
-        <module>zuul-api-gateway-server</module>
-        <module>roles-service</module>
         <module>users-info-service</module>
+        <module>oauth-service</module>
+        <module>gateway</module>
     </modules>
 </project>

@@ -1,0 +1,65 @@
+server:
+  port: 8765
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  application:
+    name: gateway
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: oauth-service
+          uri: http://localhost:8100
+          predicates:
+            - Path=/oauth2/**
+          filters:
+            - PreOauth2SSOGatewayFilter
+        - id: users-info-service
+          uri: http://localhost:8200
+          predicates:
+            - Path=/user/**
+          filters:
+            - PreOauth2SSOGatewayFilter
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          facebook:
+#            clientId: 374479264704761
+#            clientSecret: 6f388ad75de1182d96688bab7631e2e4
+#            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+#            scope:
+#              - email
+#              - public_profile
+#        provider:
+#          facebook:
+#            authorizationUri: https://www.facebook.com/v13.0/dialog/oauth
+#            tokenUri: https://graph.facebook.com/v13.0/oauth/access_token
+#            userInfoUri: https://graph.facebook.com/v13.0/me?fields=id,first_name,middle_name,last_name,name,email,picture.width(250).height(250)
+security:
+  basic:
+    enabled: false
+eureka:
+  instance:
+    hostname: localhost

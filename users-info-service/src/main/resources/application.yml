@@ -1,26 +1,43 @@
 server:
-  port: 8100
+  port: 8200
+eureka:
+  instance:
+    hostname: localhost
 spring:
   application:
-    name: users-service
-  profiles:
-    active: dev
-  zipkin:
-    base-url: http://localhost9411
+    name: users-info-service
   cloud:
     config:
-      uri: http://localhost:8888
+      enabled: false
+  profiles:
+    active: dev
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ddnshop_user
+    url: jdbc:mysql://localhost:3306/datt_demo?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
     username: root
-    password: 123456
+    password: D@y0989510517
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-    open-in-view: false
-
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+app:
+  auth:
+    tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
+    tokenExpirationMsec: 864000000
+  cors:
+    allowedOrigins: http://localhost:3000,http://localhost:8765
+#  oauth2:
+#    # After successfully authenticating with the OAuth2 Provider,
+#    # we'll be generating an auth token for the user and sending the token to the
+#    # redirectUri mentioned by the client in the /oauth2/authorize request.
+#    # We're not using cookies because they won't work well in mobile clients.
+#    authorizedRedirectUris:
+#      - http://localhost:3000/oauth2/redirect
+#      - myandroidapp://oauth2/redirect
+#      - myiosapp://oauth2/redirect
 
 
 

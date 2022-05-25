@@ -1,47 +1,78 @@
 package com.ddnshop.usersinfoservice.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "users")
-public class User implements Serializable {
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_Id;
+    @Column(nullable = false)
+    private String name;
 
-    @Column(name = "username")
-    private String username;
+    @Email
+    @Column(nullable = false)
+    private String email;
 
-    @Column(name = "password")
+    private String imageUrl;
+
+    @Column(nullable = false)
+    private Boolean emailVerified = false;
+
+    @JsonIgnore
     private String password;
 
-    @Column(name = "active")
-    private boolean active;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
 
-    @Column(name = "created_Date")
-    private String created_Date;
+    private String providerId;
 
-    @Column(name = "modified_Date")
-    private String modified_Date;
-
-
-    public User(){}
-
-    public int getUser_Id() {
-        return user_Id;
+    public Long getId() {
+        return id;
     }
 
-    public void setUser_Id(int user_Id) {
-        this.user_Id = user_Id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Boolean getEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(Boolean emailVerified) {
+        this.emailVerified = emailVerified;
     }
 
     public String getPassword() {
@@ -52,28 +83,19 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public boolean isActive() {
-        return active;
+    public AuthProvider getProvider() {
+        return provider;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setProvider(AuthProvider provider) {
+        this.provider = provider;
     }
 
-    public String getCreated_Date() {
-        return created_Date;
+    public String getProviderId() {
+        return providerId;
     }
 
-    public void setCreated_Date(String created_Date) {
-        this.created_Date = created_Date;
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
     }
-
-    public String getModified_Date() {
-        return modified_Date;
-    }
-
-    public void setModified_Date(String modified_Date) {
-        this.modified_Date = modified_Date;
-    }
-
 }
